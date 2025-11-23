@@ -3,7 +3,6 @@
 import sys
 import os
 
-# Add backend to Python path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from app.core.database import engine, Base
@@ -13,8 +12,8 @@ def init_database():
     """Initialize database tables."""
     print(f"Initializing database: {settings.DATABASE_URL}")
     
-    # Import models here so they're registered with Base
-    # from app.models.code_analysis import CodeFile, AnalysisResult
+    # Import models so they're registered with Base
+    from app.schemas.code_analysis import Codebase, CodeFile
     
     # Create all tables
     Base.metadata.create_all(bind=engine)
