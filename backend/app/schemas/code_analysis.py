@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.dialects.postgresql import UUID, JSONB
+from sqlalchemy.sql import func
 import uuid
 from datetime import datetime
 
@@ -22,3 +23,13 @@ class CodeFile(Base):
     content = Column(Text, nullable=True)
     language = Column(String, nullable=False)
     parsed_at = Column(DateTime, nullable=True)
+    
+    # NEW: Vector embedding storage
+    embedding = Column(JSONB, nullable=True)  # Store vector embeddings
+    analysis_result = Column(JSONB, nullable=True)  # Store parsed structure
+    
+    # NEW: File metadata for better analysis
+    size_bytes = Column(Integer, nullable=True)
+    line_count = Column(Integer, nullable=True)
+    function_count = Column(Integer, nullable=True)
+    class_count = Column(Integer, nullable=True)
